@@ -9,12 +9,26 @@ public class Tetris {
 	List<Tetromino> tetrominoes;
 	boolean[][] grid;
 	int difficulty;
+	Tetromino nextTetromino;
+	Tetromino heldTetromino;
 
 	public Tetris(int difficulty) {
 		tetrominoes = generateTetrominoes();
+		nextTetromino = getRandomTetromino();
+		heldTetromino = getNextTetromino();
 		grid = new boolean[10][10];
 		this.difficulty = difficulty;
 		run();
+	}
+
+	private Tetromino getRandomTetromino() {
+		return tetrominoes.get((int) (Math.random() * tetrominoes.size()));
+	}
+
+	private Tetromino getNextTetromino() {
+		Tetromino tempTetromino = nextTetromino;
+		nextTetromino = getRandomTetromino();
+		return tempTetromino;
 	}
 
 	private void run() {
