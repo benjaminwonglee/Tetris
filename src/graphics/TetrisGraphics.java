@@ -7,6 +7,12 @@ public class TetrisGraphics extends JPanel {
 
 	public TetrisGraphics() {
 		this.setLayout(null);
-		this.setBounds(50, 50, 500, 900);
+		// Frame is 800 x 1000
+		this.setBounds(0, 0, 800, 1000);
+		JPanel gamePanel = new GamePanel();
+		JPanel displayPanel = new DisplayPanel();
+		this.add(gamePanel);
+		this.add(displayPanel);
+
 	}
 }

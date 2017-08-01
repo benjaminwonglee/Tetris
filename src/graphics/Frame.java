@@ -10,7 +10,6 @@ public class Frame {
 		JFrame frame = new JFrame();
 		frame.setTitle("Tetris");
 		frame.setPreferredSize(new Dimension(800, 1000));
-		//frame.setBounds(0, 0, 800, 1000);
 		frame.setLayout(null);
 		frame.addWindowListener(new TetrisWindowListener());
 		JPanel mainPanel = new TetrisGraphics();

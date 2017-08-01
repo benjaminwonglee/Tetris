@@ -19,7 +19,6 @@ public class TetrisWindowListener implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent e) {
-		// TODO: Bring up a JDialog Box
 		System.exit(1);
 	}
 
