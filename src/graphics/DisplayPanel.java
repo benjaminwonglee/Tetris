@@ -13,6 +13,6 @@ public class DisplayPanel extends JPanel {
 
 	private void defineDisplayPanel() {
 		this.setBackground(new Color(100, 100, 0));
-		this.setBounds(600, 0, 200, 1000);
+		this.setBounds(700, 0, 300, 1000);
 	}
 }
