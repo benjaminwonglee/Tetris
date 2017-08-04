@@ -1,6 +1,6 @@
 package graphics.panels;
 
-import java.awt.Container;
+import java.awt.Color;
 
 import javax.swing.JPanel;
 
@@ -14,6 +14,7 @@ public class TetrisGraphics extends JPanel {
 		this.frame = parent;
 		this.setLayout(null);
 		this.setBounds(0, 0, 900, 940);
+		this.setBackground(Color.BLACK);
 		JPanel titlePanel = new TitlePanel(this);
 		JPanel gamePanel = new GamePanel(this);
 		JPanel displayPanel = new DisplayPanel(this);
@@ -24,5 +25,5 @@ public class TetrisGraphics extends JPanel {
 
 	public Frame getFrame() {
 		return frame;
-	}	
+	}
 }
