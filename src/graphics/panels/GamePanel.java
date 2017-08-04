@@ -14,37 +14,16 @@ public class GamePanel extends JPanel {
 	public GamePanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
 		JPanel grid = new GridPanel();
+		this.setLayout(null);
+		grid.setBounds(10, 10, 391, 859);
 		this.add(grid);
 		defineGamePanel();
 	}
 
 	private void defineGamePanel() {
-		this.setBounds(0, 50, 450, 890);
+		this.setBounds(20, 58, 411, 878);
 		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(new GameBorder());
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(new Color(150, 150, 150));
-		drawGrid(g);
-	}
-
-	private void drawGrid(Graphics g) {
-		/*
-		 * Border is 60 width and 60 height total. Need 10 cells wide, 22 cells
-		 * high. Need square size that is the same height and width. 600 / 15
-		 * (cols) = 40, 900 / 40 = (approx) 22.5 rows.
-		 */
-		int sqSize = 38;
-		for (int cols = 0; cols < 32; cols++) {
-			for (int rows = 0; rows < 45; rows++) {
-				g.drawLine(sqSize * cols, sqSize * rows, sqSize * cols, 900);
-				g.drawLine(sqSize * cols, sqSize * rows, 600, sqSize * rows);
-			}
-		}
-
 	}
 
 	public TetrisGraphics getTetrisGraphics() {

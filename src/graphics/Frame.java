@@ -11,7 +11,7 @@ public class Frame {
 	public Frame() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Tetris");
-		//Actual width 795, Actual height 940
+		// Actual width 795, Actual height 940
 		frame.setPreferredSize(new Dimension(800, 975));
 		frame.setLayout(null);
 		frame.setResizable(false);
