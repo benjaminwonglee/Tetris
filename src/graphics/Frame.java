@@ -5,17 +5,20 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import graphics.panels.TetrisGraphics;
+
 public class Frame {
 	public Frame() {
 		JFrame frame = new JFrame();
 		frame.setTitle("Tetris");
-		frame.setPreferredSize(new Dimension(1000, 950));
+		//Actual width 795, Actual height 940
+		frame.setPreferredSize(new Dimension(800, 975));
 		frame.setLayout(null);
 		frame.setResizable(false);
-		frame.addWindowListener(new TetrisWindowListener());
-		JPanel mainPanel = new TetrisGraphics();
-		frame.add(mainPanel);
 		frame.pack();
+		frame.addWindowListener(new TetrisWindowListener());
+		JPanel mainPanel = new TetrisGraphics(this);
+		frame.add(mainPanel);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}

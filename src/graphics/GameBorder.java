@@ -21,8 +21,8 @@ public class GameBorder implements Border {
 
 	@Override
 	public void paintBorder(Component arg0, Graphics g, int x, int y, int width, int height) {
-		for (int i = 30; i >= 0; i--) {
-			g.setColor(new Color(200 - i * 2, i * 5, 0));
+		for (int i = 10; i >= 0; i--) {
+			g.setColor(new Color(200 - i * 10, i * 10, 0));
 			g.drawRect(i, i, width - (i * 2), height - (i * 2));
 		}
 	}
