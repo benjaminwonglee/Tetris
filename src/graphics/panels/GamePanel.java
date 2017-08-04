@@ -9,22 +9,25 @@ import graphics.GameBorder;
 
 public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1244543786097347429L;
-	private TetrisGraphics tetrisGraphics; 
-	
+	private TetrisGraphics tetrisGraphics;
+
 	public GamePanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
+		JPanel grid = new GridPanel();
+		this.add(grid);
 		defineGamePanel();
 	}
 
 	private void defineGamePanel() {
 		this.setBounds(0, 50, 450, 890);
-		this.setBackground(new Color(100, 100, 100));
+		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(new GameBorder());
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.setColor(new Color(150, 150, 150));
 		drawGrid(g);
 	}
 

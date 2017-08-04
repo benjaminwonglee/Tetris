@@ -1,7 +1,5 @@
 package graphics.panels;
 
-import java.awt.Container;
-
 import javax.swing.JPanel;
 
 import graphics.Frame;
