@@ -1,7 +1,7 @@
 package graphics.panels;
 
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
 
 	private void defineGamePanel() {
 		this.setBounds(20, 58, 411, 878);
+		this.setPreferredSize(new Dimension(411, 878));
 		this.setBackground(new Color(0, 0, 0));
 		this.setBorder(new GameBorder());
 	}
