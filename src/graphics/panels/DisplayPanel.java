@@ -26,12 +26,12 @@ public class DisplayPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for (int i = 20; i < 50; i++) {
-			// Darker Blue
-			g.setColor(new Color(i, i, i * 2));
-			g.fillRect((i - 20) * 15, 0, 15, 900);
-			// Lighter Blue
-			g.setColor(new Color(i, i, i * 3));
-			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 40);
+			// Darker Grey
+			g.setColor(new Color(i*2, i*2, i*2));
+			g.fillRect((i - 20) * 15, 0, 15, 891);
+			// Lighter Grey
+			g.setColor(new Color(i*3, i*3, i*3));
+			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 35);
 		}
 	}
 
