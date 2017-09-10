@@ -1,6 +1,7 @@
 package graphics.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -15,7 +16,7 @@ public class DisplayPanel extends JPanel {
 	}
 
 	private void defineDisplayPanel() {
-		this.setBounds(450, 50, 350, 890);
+		this.setPreferredSize(new Dimension(350, 890));
 	}
 
 	@Override
