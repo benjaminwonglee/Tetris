@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import graphics.panels.TetrisGraphics;
+import graphics.panels.TitlePanel;
 import tetris.Tetris;
 
 public class Frame extends JFrame{
@@ -15,7 +16,9 @@ public class Frame extends JFrame{
 	public Frame(Tetris tetris) {
 		super("Tetris");
 		this.tetris = tetris;
+		JPanel titlePanel = new TitlePanel(this);
 		JPanel mainPanel = new TetrisGraphics(this);
+		add(titlePanel, BorderLayout.NORTH);
 		add(mainPanel, BorderLayout.CENTER);
 		setFrameProperties();
 	}

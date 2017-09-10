@@ -14,12 +14,10 @@ public class TetrisGraphics extends JPanel {
 
 	public TetrisGraphics(Frame parent) {
 		this.frame = parent;
-		this.setPreferredSize(new Dimension(900, 940));
+		//this.setPreferredSize(new Dimension(800, 900));
 		this.setBackground(Color.BLACK);
-		JPanel titlePanel = new TitlePanel(this);
 		JPanel gamePanel = new GamePanel(this);
 		JPanel displayPanel = new DisplayPanel(this);
-		this.add(titlePanel, BorderLayout.NORTH);
 		this.add(gamePanel, BorderLayout.WEST);
 		this.add(displayPanel,BorderLayout.EAST);
 	}

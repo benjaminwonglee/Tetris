@@ -1,6 +1,7 @@
 package graphics.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -16,11 +17,15 @@ public class GridPanel extends JPanel {
 		drawGrid(g);
 	}
 
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(430, 900);
+	}
+
 	private void drawGrid(Graphics g) {
 		/*
-		 * Border is 60 width and 60 height total. Need 10 cells wide, 22 cells
-		 * high. Need square size that is the same height and width. 600 / 15
-		 * (cols) = 40, 900 / 40 = (approx) 22.5 rows.
+		 * Need 10 cells wide, 22 cells high. Need square size that is the same
+		 * height and width.
 		 */
 		int sqSize = 39;
 		for (int cols = 0; cols < 32; cols++) {

@@ -16,18 +16,19 @@ public class DisplayPanel extends JPanel {
 	}
 
 	private void defineDisplayPanel() {
-		this.setPreferredSize(new Dimension(350, 890));
+		this.setPreferredSize(new Dimension(380, 900));
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 20; i < 45; i++) {
+		for (int i = 20; i < 50; i++) {
+			// Darker Blue
 			g.setColor(new Color(i, i, i * 2));
-			g.fillRect((i - 20) * 15, 0, 15, 890);
+			g.fillRect((i - 20) * 15, 0, 15, 900);
+			// Lighter Blue
 			g.setColor(new Color(i, i, i * 3));
 			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 40);
-
 		}
 	}
 

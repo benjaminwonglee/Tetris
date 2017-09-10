@@ -14,8 +14,7 @@ public class GamePanel extends JPanel {
 	public GamePanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
 		JPanel grid = new GridPanel();
-		//grid.setBounds(10, 10, 391, 859);
-		this.add(grid);
+		add(grid);
 		defineGamePanel();
 	}
 
@@ -30,8 +29,6 @@ public class GamePanel extends JPanel {
 	
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(411, 878);
+		return new Dimension(450, 900);
 	}
-
-
 }

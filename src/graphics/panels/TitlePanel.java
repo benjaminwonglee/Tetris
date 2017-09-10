@@ -7,18 +7,19 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import graphics.Frame;
+
 public class TitlePanel extends JPanel {
 	private static final long serialVersionUID = 2349693647370386088L;
-	private TetrisGraphics tetrisGraphics;
+	private Frame frame;
 
-	public TitlePanel(TetrisGraphics tetrisGraphics) {
-		this.tetrisGraphics = tetrisGraphics;
+	public TitlePanel(Frame frame) {
+		this.frame = frame;
 		defineTitlePanel();
 	}
 
 	private void defineTitlePanel() {
-		this.setBounds(0, 0, 795, 50);
-		this.setPreferredSize(new Dimension(795, 50));
+		this.setPreferredSize(new Dimension(800, 50));
 	}
 
 	@Override
@@ -33,8 +34,8 @@ public class TitlePanel extends JPanel {
 		g.drawString("Tetris", 15, 40);
 	}
 
-	public TetrisGraphics getTetrisGraphics() {
-		return tetrisGraphics;
+	public Frame getFrame() {
+		return frame;
 	}
 
 }

@@ -11,7 +11,7 @@ public class GameBorder implements Border {
 
 	@Override
 	public Insets getBorderInsets(Component arg0) {
-		return new Insets(0, 0, 0, 0);
+		return new Insets(10, 10, 10, 10);
 	}
 
 	@Override
