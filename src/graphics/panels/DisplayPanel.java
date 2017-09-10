@@ -1,6 +1,7 @@
 package graphics.panels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -14,19 +15,23 @@ public class DisplayPanel extends JPanel {
 		defineDisplayPanel();
 	}
 
+	/**
+	 * Height is defined as 22 squares x 40 pixels = 880 + (5*2) + 1
+	 */
 	private void defineDisplayPanel() {
-		this.setBounds(450, 50, 350, 890);
+		this.setPreferredSize(new Dimension(380, 891));
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 20; i < 45; i++) {
+		for (int i = 20; i < 50; i++) {
+			// Darker Blue
 			g.setColor(new Color(i, i, i * 2));
-			g.fillRect((i - 20) * 15, 0, 15, 890);
+			g.fillRect((i - 20) * 15, 0, 15, 900);
+			// Lighter Blue
 			g.setColor(new Color(i, i, i * 3));
 			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 40);
-
 		}
 	}
 
