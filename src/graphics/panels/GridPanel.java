@@ -19,7 +19,7 @@ public class GridPanel extends JPanel {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(430, 900);
+		return new Dimension(401, 881);
 	}
 
 	private void drawGrid(Graphics g) {
@@ -27,11 +27,10 @@ public class GridPanel extends JPanel {
 		 * Need 10 cells wide, 22 cells high. Need square size that is the same
 		 * height and width.
 		 */
-		int sqSize = 39;
-		for (int cols = 0; cols < 32; cols++) {
-			for (int rows = 0; rows < 45; rows++) {
-				g.drawLine(sqSize * cols, sqSize * rows, sqSize * cols, 900);
-				g.drawLine(sqSize * cols, sqSize * rows, 600, sqSize * rows);
+		int sqSize = 40;
+		for (int cols = 0; cols < 10; cols++) {
+			for (int rows = 0; rows < 22; rows++) {
+				g.drawRect(sqSize * cols, sqSize * rows, sqSize, sqSize);
 			}
 		}
 

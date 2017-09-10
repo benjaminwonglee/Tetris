@@ -15,8 +15,11 @@ public class DisplayPanel extends JPanel {
 		defineDisplayPanel();
 	}
 
+	/**
+	 * Height is defined as 22 squares x 40 pixels = 880 + (5*2) + 1
+	 */
 	private void defineDisplayPanel() {
-		this.setPreferredSize(new Dimension(380, 900));
+		this.setPreferredSize(new Dimension(380, 891));
 	}
 
 	@Override
