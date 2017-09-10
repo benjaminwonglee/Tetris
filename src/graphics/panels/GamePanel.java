@@ -2,10 +2,9 @@ package graphics.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
-
-import graphics.GameBorder;
 
 public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1244543786097347429L;
@@ -14,21 +13,33 @@ public class GamePanel extends JPanel {
 	public GamePanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
 		JPanel grid = new GridPanel();
-		this.setLayout(null);
-		grid.setBounds(10, 10, 391, 859);
-		this.add(grid);
-		defineGamePanel();
+		add(grid);
 	}
 
-	private void defineGamePanel() {
-		this.setBounds(20, 58, 411, 878);
-		this.setPreferredSize(new Dimension(411, 878));
-		this.setBackground(new Color(0, 0, 0));
-		this.setBorder(new GameBorder());
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(new Color(180, 10, 10));
+		g.fillRect(0, 0, getPreferredSize().width, getPreferredSize().height);
+		int offset1 = 1;
+		int offsetW1 = 6;
+		g.setColor(new Color(150, 20, 10));
+		g.fillRect(offset1 + offsetW1, offset1, getPreferredSize().width - (offset1 * 2) - (offsetW1 * 2),
+				getPreferredSize().height - (offset1 * 2));
+		int offset2 = 3;
+		int offsetW2 = 10;
+		g.setColor(new Color(100, 30, 10));
+		g.fillRect(offset2 + offsetW2, offset2, getPreferredSize().width - (offset2 * 2) - (offsetW2 * 2),
+				getPreferredSize().height - (offset2 * 2));
 	}
 
 	public TetrisGraphics getTetrisGraphics() {
 		return tetrisGraphics;
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(450, 891);
 	}
 
 }
