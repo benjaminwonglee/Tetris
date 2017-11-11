@@ -1,13 +1,13 @@
-package graphics;
+package view;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import graphics.panels.TetrisGraphics;
-import graphics.panels.TitlePanel;
-import tetris.Tetris;
+import model.tetris.Tetris;
+import view.panels.TetrisGraphics;
+import view.panels.TitlePanel;
 
 public class Frame extends JFrame{
 	private static final long serialVersionUID = -4625604749828860822L;

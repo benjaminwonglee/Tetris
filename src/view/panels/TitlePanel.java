@@ -1,4 +1,4 @@
-package graphics.panels;
+package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import graphics.Frame;
+import view.Frame;
 
 public class TitlePanel extends JPanel {
 	private static final long serialVersionUID = 2349693647370386088L;

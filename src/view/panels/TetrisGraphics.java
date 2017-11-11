@@ -1,4 +1,4 @@
-package graphics.panels;
+package view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import graphics.Frame;
+import view.Frame;
 
 public class TetrisGraphics extends JPanel {
 	private static final long serialVersionUID = -1369565331561128914L;

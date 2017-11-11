@@ -1,10 +1,10 @@
-package tetromino;
+package model.tetromino;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class LongBlock extends Tetromino implements DrawInterface {
+public class IBlock extends Tetromino implements DrawInterface {
 
 	@Override
 	public void draw(Graphics g) {

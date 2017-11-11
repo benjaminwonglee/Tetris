@@ -1,4 +1,4 @@
-package tetromino;
+package model.tetromino;
 
 public abstract class Tetromino {
 	private int x;
