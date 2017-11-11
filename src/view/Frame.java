@@ -1,21 +1,20 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.tetris.Tetris;
 import view.panels.TetrisGraphics;
 import view.panels.TitlePanel;
 
-public class Frame extends JFrame{
+public class Frame extends JFrame implements Observer {
 	private static final long serialVersionUID = -4625604749828860822L;
-	private Tetris tetris;
-
-	public Frame(Tetris tetris) {
+	
+	public Frame() {
 		super("Tetris");
-		this.tetris = tetris;
 		JPanel titlePanel = new TitlePanel(this);
 		JPanel mainPanel = new TetrisGraphics(this);
 		add(titlePanel, BorderLayout.NORTH);
@@ -32,7 +31,22 @@ public class Frame extends JFrame{
 		setVisible(true);
 	}
 
-	public static void main(String args[]) {
-		new Frame(null);
+	/**
+	 * Deal with updates to the Tetris model
+	 */
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+
 	}
+
+	/**
+	 * Testing Main to test graphics without the game.
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[]) {
+		new Frame();
+	}
+
 }

@@ -5,9 +5,7 @@ import java.util.List;
 
 public class TetrominoGenerator {
 
-	List<Tetromino> tetrominoes;
-	Tetromino nextTetromino;
-	Tetromino heldTetromino;
+	private List<Tetromino> tetrominoes;
 	int sizeOfList = 200;
 
 	public TetrominoGenerator() {
@@ -16,8 +14,6 @@ public class TetrominoGenerator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		nextTetromino = getRandomTetromino();
-		// heldTetromino = getNextTetromino();
 	}
 
 	public List<Tetromino> generateTetrominoes() throws Exception {
@@ -53,14 +49,13 @@ public class TetrominoGenerator {
 		return tetroList;
 	}
 
-	public Tetromino getRandomTetromino() {
-		return tetrominoes.get((int) (Math.random() * tetrominoes.size()));
+		
+	public List<Tetromino> getTetrominoes() {
+		return tetrominoes;
 	}
 
-	public Tetromino holdTetromino() {
-		Tetromino tempTetromino = nextTetromino;
-		nextTetromino = getRandomTetromino();
-		return tempTetromino;
+	public int getSizeOfList() {
+		return sizeOfList;
 	}
 
 }
