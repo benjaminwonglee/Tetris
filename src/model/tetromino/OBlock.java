@@ -17,4 +17,15 @@ public class OBlock extends Tetromino implements DrawInterface {
 		return Color.YELLOW;
 	}
 
+	@Override
+	public boolean[][] getTetrominoMatrix() {
+		boolean[][] matrix = null;
+		matrix = new boolean[2][2];
+		matrix[0][0] = true;
+		matrix[0][1] = true;
+		matrix[1][0] = true;
+		matrix[1][1] = true;
+		return matrix;
+	}
+
 }

@@ -24,9 +24,10 @@ public class Frame extends JFrame implements Observer {
 
 	private void setFrameProperties() {
 		// Actual width 795, Actual height 940
+		addWindowListener(new TetrisWindowListener());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		pack();
-		addWindowListener(new TetrisWindowListener());
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}

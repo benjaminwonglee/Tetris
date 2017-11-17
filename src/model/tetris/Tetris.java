@@ -11,18 +11,25 @@ import model.tetromino.TetrominoGenerator;
 public class Tetris extends Observable {
 	private boolean[][] grid;
 	private int difficulty;
+	private int width = 10;
+	private int height = 22;
 	private TetrominoGenerator generator = new TetrominoGenerator();
 	private Tetromino current;
 	private Tetromino nextTetromino;
 	private Tetromino heldTetromino;
 
 	public Tetris(int difficulty) {
-		grid = new boolean[10][10];
+		grid = new boolean[width][height];
 		this.difficulty = difficulty;
 		current = getRandomTetromino();
 		nextTetromino = getRandomTetromino();
-		
+		createTetromino(current);
 		run();
+	}
+
+	private void createTetromino(Tetromino current) {
+		current.getTetrominoMatrix();
+		// TODO: Implement the initial creation of a tetromino
 	}
 
 	public Tetromino getRandomTetromino() {
@@ -50,7 +57,6 @@ public class Tetris extends Observable {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	private void tick() {
@@ -58,7 +64,7 @@ public class Tetris extends Observable {
 	}
 
 	private boolean rowEmpty(boolean[][] grid, int row) {
-		return false;
+		return true;
 	}
 
 	public void setTetrominoAction(Action action) {

@@ -78,4 +78,6 @@ public abstract class Tetromino {
 	public void setOffsetV(int offsetV) {
 		this.offsetV = offsetV;
 	}
+
+	public abstract boolean[][] getTetrominoMatrix();
 }
