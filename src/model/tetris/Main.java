@@ -7,6 +7,5 @@ public class Main {
 		System.out.println("bees");
 		Tetris tetris = new Tetris(1); 
 		tetris.addObserver(new Frame());	
-		
 	}
 }

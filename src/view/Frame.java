@@ -12,11 +12,12 @@ import view.panels.TitlePanel;
 
 public class Frame extends JFrame implements Observer {
 	private static final long serialVersionUID = -4625604749828860822L;
+	private JPanel mainPanel; 
 	
 	public Frame() {
 		super("Tetris");
 		JPanel titlePanel = new TitlePanel(this);
-		JPanel mainPanel = new TetrisGraphics(this);
+		mainPanel = new TetrisGraphics(this);
 		add(titlePanel, BorderLayout.NORTH);
 		add(mainPanel, BorderLayout.CENTER);
 		setFrameProperties();
@@ -37,8 +38,7 @@ public class Frame extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-
+		mainPanel.repaint();
 	}
 
 	/**

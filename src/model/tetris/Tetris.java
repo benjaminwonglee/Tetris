@@ -1,7 +1,9 @@
 package model.tetris;
 
+import java.awt.Point;
 import java.util.List;
 import java.util.Observable;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
 import common.Action;
@@ -10,13 +12,15 @@ import model.tetromino.TetrominoGenerator;
 
 public class Tetris extends Observable {
 	private boolean[][] grid;
-	private int difficulty;
 	private int width = 10;
 	private int height = 22;
+	private int difficulty;
+	// Tetromino fields
 	private TetrominoGenerator generator = new TetrominoGenerator();
 	private Tetromino current;
 	private Tetromino nextTetromino;
 	private Tetromino heldTetromino;
+	private Point pivot;
 
 	public Tetris(int difficulty) {
 		grid = new boolean[width][height];
@@ -27,23 +31,13 @@ public class Tetris extends Observable {
 		run();
 	}
 
-	private void createTetromino(Tetromino current) {
-		current.getTetrominoMatrix();
-		// TODO: Implement the initial creation of a tetromino
-	}
-
-	public Tetromino getRandomTetromino() {
-		List<Tetromino> tetrominoes = generator.getTetrominoes();
-		return tetrominoes.get((int) (Math.random() * tetrominoes.size()));
-	}
-
-	public void holdTetromino() {
-		Tetromino tempTetromino = nextTetromino;
-		nextTetromino = getRandomTetromino();
-		heldTetromino = tempTetromino;
-	}
-
 	private void run() {
+		Timer t = new Timer();
+		TetrisTask tt = new TetrisTask(this);
+		t.scheduleAtFixedRate(tt, 0, 1000 / difficulty);
+	}
+
+	private void runAlt() {
 		// Will this work with KeyListener? If not, use java.util.timer.
 		while (rowEmpty(grid, 0)) {
 			tick();
@@ -61,6 +55,34 @@ public class Tetris extends Observable {
 
 	private void tick() {
 
+	}
+
+	private void createTetromino(Tetromino current) {
+		boolean[][] tetromino = current.getTetrominoMatrix();
+		pivot = new Point();
+		pivot.x = (grid.length / 2) - (tetromino.length / 2) - 1;
+		pivot.y = 0;
+		for (int i = 0; i < tetromino.length; i++) {
+			for (int j = 0; j < tetromino[0].length; j++) {
+				if (tetromino[i][j]) {
+					grid[pivot.x + i][pivot.y + j] = true;
+				}
+			}
+		}
+		setChanged();
+		notifyObservers();
+		System.out.println(textGrid());
+	}
+
+	public Tetromino getRandomTetromino() {
+		List<Tetromino> tetrominoes = generator.getTetrominoes();
+		return tetrominoes.get((int) (Math.random() * tetrominoes.size()));
+	}
+
+	public void holdTetromino() {
+		Tetromino tempTetromino = nextTetromino;
+		nextTetromino = getRandomTetromino();
+		heldTetromino = tempTetromino;
 	}
 
 	private boolean rowEmpty(boolean[][] grid, int row) {
@@ -94,8 +116,31 @@ public class Tetris extends Observable {
 		notifyObservers();
 	}
 
+	public String textGrid() {
+		String text = "Current grid:\n";
+		for (int col = 0; col < grid[0].length; col++) {
+			for (int row = 0; row < grid.length; row++) {
+				if (grid[row][col]) {
+					text += " T ";
+				} else {
+					text += " F ";
+				}
+			}
+			text += "\n";
+		}
+		return text;
+	}
+
 	public TetrominoGenerator getGenerator() {
 		return generator;
+	}
+
+	public boolean[][] getGrid() {
+		return grid;
+	}
+
+	public void setGrid(boolean[][] grid) {
+		this.grid = grid;
 	}
 
 	public Tetromino getCurrent() {
@@ -110,4 +155,11 @@ public class Tetris extends Observable {
 		return heldTetromino;
 	}
 
+	public Point getPivot() {
+		return pivot;
+	}
+
+	public void setPivot(Point pivot) {
+		this.pivot = pivot;
+	}
 }
