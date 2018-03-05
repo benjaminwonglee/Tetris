@@ -11,10 +11,12 @@ public class GridPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
+
 		super.paintComponent(g);
 		g.setColor(new Color(150, 150, 150));
 		this.setBackground(new Color(0, 0, 0));
 		drawGrid(g);
+		drawPieces(g);
 	}
 
 	@Override
@@ -22,17 +24,24 @@ public class GridPanel extends JPanel {
 		return new Dimension(401, 881);
 	}
 
+	/**
+	 * Need to draw a grid 10 cells wide, 22 cells high. Need square size that is the same
+	 * height and width.
+	 */
 	private void drawGrid(Graphics g) {
-		/*
-		 * Need 10 cells wide, 22 cells high. Need square size that is the same
-		 * height and width.
-		 */
+
 		int sqSize = 40;
 		for (int cols = 0; cols < 10; cols++) {
 			for (int rows = 0; rows < 22; rows++) {
 				g.drawRect(sqSize * cols, sqSize * rows, sqSize, sqSize);
 			}
 		}
+
+	}
+
+	private void drawPieces(Graphics g) {
+
+		// TODO Auto-generated method stub
 
 	}
 

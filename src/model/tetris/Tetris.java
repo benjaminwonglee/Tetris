@@ -11,10 +11,12 @@ import model.tetromino.Tetromino;
 import model.tetromino.TetrominoGenerator;
 
 public class Tetris extends Observable {
+
 	private boolean[][] grid;
 	private int width = 10;
 	private int height = 22;
 	private int difficulty;
+
 	// Tetromino fields
 	private TetrominoGenerator generator = new TetrominoGenerator();
 	private Tetromino current;
@@ -23,6 +25,7 @@ public class Tetris extends Observable {
 	private Point pivot;
 
 	public Tetris(int difficulty) {
+
 		grid = new boolean[width][height];
 		this.difficulty = difficulty;
 		current = getRandomTetromino();
@@ -32,12 +35,14 @@ public class Tetris extends Observable {
 	}
 
 	private void run() {
+
 		Timer t = new Timer();
 		TetrisTask tt = new TetrisTask(this);
 		t.scheduleAtFixedRate(tt, 0, 1000 / difficulty);
 	}
 
 	private void runAlt() {
+
 		// Will this work with KeyListener? If not, use java.util.timer.
 		while (rowEmpty(grid, 0)) {
 			tick();
@@ -58,6 +63,7 @@ public class Tetris extends Observable {
 	}
 
 	private void createTetromino(Tetromino current) {
+
 		boolean[][] tetromino = current.getTetrominoMatrix();
 		pivot = new Point();
 		pivot.x = (grid.length / 2) - (tetromino.length / 2) - 1;
@@ -70,11 +76,12 @@ public class Tetris extends Observable {
 			}
 		}
 		setChanged();
-		notifyObservers();
+		notifyObservers(grid);
 		System.out.println(textGrid());
 	}
 
 	public Tetromino getRandomTetromino() {
+
 		List<Tetromino> tetrominoes = generator.getTetrominoes();
 		return tetrominoes.get((int) (Math.random() * tetrominoes.size()));
 	}
@@ -116,6 +123,10 @@ public class Tetris extends Observable {
 		notifyObservers();
 	}
 
+	/**
+	 * Print a display of the current grid state
+	 * @return
+	 */
 	public String textGrid() {
 		String text = "Current grid:\n";
 		for (int col = 0; col < grid[0].length; col++) {

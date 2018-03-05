@@ -12,8 +12,8 @@ import view.panels.TitlePanel;
 
 public class Frame extends JFrame implements Observer {
 	private static final long serialVersionUID = -4625604749828860822L;
-	private JPanel mainPanel; 
-	
+	private TetrisGraphics mainPanel;
+
 	public Frame() {
 		super("Tetris");
 		JPanel titlePanel = new TitlePanel(this);
@@ -38,12 +38,17 @@ public class Frame extends JFrame implements Observer {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
+
+		if (arg1 instanceof boolean[]) {
+			boolean[] grid = (boolean[]) arg1;
+			mainPanel.setGrid(grid);
+		}
 		mainPanel.repaint();
 	}
 
 	/**
 	 * Testing Main to test graphics without the game.
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String args[]) {

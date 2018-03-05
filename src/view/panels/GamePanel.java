@@ -16,6 +16,8 @@ public class GamePanel extends JPanel {
 		add(grid);
 	}
 
+	//TODO: Draw the pieces in either the GridPanel or here. Decide.
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

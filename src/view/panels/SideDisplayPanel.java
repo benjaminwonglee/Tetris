@@ -6,11 +6,11 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-public class DisplayPanel extends JPanel {
+public class SideDisplayPanel extends JPanel {
 	private static final long serialVersionUID = 4667216275241133396L;
 	private TetrisGraphics tetrisGraphics;
 
-	public DisplayPanel(TetrisGraphics tetrisGraphics) {
+	public SideDisplayPanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
 		defineDisplayPanel();
 	}
@@ -24,15 +24,19 @@ public class DisplayPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
+
 		super.paintComponent(g);
 		for (int i = 20; i < 50; i++) {
+
 			// Darker Grey
 			g.setColor(new Color(i*2, i*2, i*2));
 			g.fillRect((i - 20) * 15, 0, 15, 891);
+
 			// Lighter Grey
 			g.setColor(new Color(i*3, i*3, i*3));
 			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 35);
 		}
+
 	}
 
 	public TetrisGraphics getTetrisGraphics() {

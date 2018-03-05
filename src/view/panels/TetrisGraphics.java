@@ -2,7 +2,8 @@ package view.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
@@ -11,12 +12,16 @@ import view.Frame;
 public class TetrisGraphics extends JPanel {
 	private static final long serialVersionUID = -1369565331561128914L;
 	private Frame frame;
+	private boolean[] grid;
+	private GamePanel gamePanel;
+	private SideDisplayPanel displayPanel;
 
 	public TetrisGraphics(Frame parent) {
+
 		this.frame = parent;
 		this.setBackground(new Color(50, 0, 0));
-		JPanel gamePanel = new GamePanel(this);
-		JPanel displayPanel = new DisplayPanel(this);
+		gamePanel = new GamePanel(this);
+		displayPanel = new SideDisplayPanel(this);
 		this.add(gamePanel, BorderLayout.WEST);
 		this.add(displayPanel, BorderLayout.EAST);
 	}
@@ -24,4 +29,19 @@ public class TetrisGraphics extends JPanel {
 	public Frame getFrame() {
 		return frame;
 	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		gamePanel.repaint();
+	}
+
+	public boolean[] getGrid() {
+		return grid;
+	}
+
+	public void setGrid(boolean[] grid) {
+		this.grid = grid;
+	}
+
 }
