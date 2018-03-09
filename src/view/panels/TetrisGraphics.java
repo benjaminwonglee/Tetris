@@ -3,16 +3,15 @@ package view.panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
 
+import model.tetris.Tetris;
 import view.Frame;
 
 public class TetrisGraphics extends JPanel {
 	private static final long serialVersionUID = -1369565331561128914L;
 	private Frame frame;
-	private boolean[] grid;
 	private GamePanel gamePanel;
 	private SideDisplayPanel displayPanel;
 
@@ -36,12 +35,8 @@ public class TetrisGraphics extends JPanel {
 		gamePanel.repaint();
 	}
 
-	public boolean[] getGrid() {
-		return grid;
-	}
-
-	public void setGrid(boolean[] grid) {
-		this.grid = grid;
+	public Tetris getModel() {
+		return frame.getModel();
 	}
 
 }

@@ -7,7 +7,14 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class GridPanel extends JPanel {
+
 	private static final long serialVersionUID = -4857330386621368616L;
+	private GamePanel parent;
+	private int sqSize = 40;
+
+	public GridPanel(GamePanel gamePanel) {
+		this.parent = gamePanel;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -25,15 +32,14 @@ public class GridPanel extends JPanel {
 	}
 
 	/**
-	 * Need to draw a grid 10 cells wide, 22 cells high. Need square size that is the same
-	 * height and width.
+	 * Need to draw a grid 10 cells wide, 22 cells high. Need square size that is
+	 * the same height and width.
 	 */
 	private void drawGrid(Graphics g) {
 
-		int sqSize = 40;
-		for (int cols = 0; cols < 10; cols++) {
-			for (int rows = 0; rows < 22; rows++) {
-				g.drawRect(sqSize * cols, sqSize * rows, sqSize, sqSize);
+		for (int col = 0; col < 10; col++) {
+			for (int row = 0; row < 22; row++) {
+				g.drawRect(sqSize * col, sqSize * row, sqSize, sqSize);
 			}
 		}
 
@@ -41,7 +47,15 @@ public class GridPanel extends JPanel {
 
 	private void drawPieces(Graphics g) {
 
-		// TODO Auto-generated method stub
+		Color[][] grid = parent.getModel().getGrid();
+		for (int col = 0; col < grid.length; col++) {
+			for (int row = 0; row < grid[0].length; row++) {
+				if (grid[col][row] != null) {
+					g.setColor(grid[col][row]);
+					g.fillRect(sqSize * col, sqSize * row, sqSize, sqSize);
+				}
+			}
+		}
 
 	}
 

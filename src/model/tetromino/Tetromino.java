@@ -1,12 +1,14 @@
 package model.tetromino;
 
-public abstract class Tetromino {
+import java.awt.Color;
+
+public abstract class Tetromino implements DrawInterface{
 	private int x;
 	private int y;
 	private int orientation = 0;
 	private int offsetH = 0;
 	private int offsetV = 0;
-	
+
 
 	public void softDrop() {
 		//Figure out a way to find contact with lowest block underneath
@@ -15,7 +17,7 @@ public abstract class Tetromino {
 
 	public void hardDrop() {
 		//Figure out a way to find contact with lowest block underneath
-		
+
 	}
 
 	public void rotateLeft() {
@@ -80,4 +82,5 @@ public abstract class Tetromino {
 	}
 
 	public abstract boolean[][] getTetrominoMatrix();
+
 }

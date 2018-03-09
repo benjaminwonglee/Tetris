@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class TBlock extends Tetromino implements DrawInterface {
+public class TBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {

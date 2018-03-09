@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class LBlock extends Tetromino implements DrawInterface {
+public class LBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
@@ -16,7 +16,7 @@ public class LBlock extends Tetromino implements DrawInterface {
 	public Color getColor() {
 		return Color.PINK;
 	}
-	
+
 	@Override
 	public boolean[][] getTetrominoMatrix() {
 		boolean[][] matrix = null;

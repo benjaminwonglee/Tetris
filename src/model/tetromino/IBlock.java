@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Arrays;
 
-public class IBlock extends Tetromino implements DrawInterface {
+public class IBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
@@ -26,7 +26,13 @@ public class IBlock extends Tetromino implements DrawInterface {
 		} else {
 			matrix = new boolean[1][4];
 		}
-		Arrays.fill(matrix, true);
+
+		for (int col = 0; col < matrix.length; col++) {
+			for (int row = 0; row < matrix[0].length; row++) {
+
+				matrix[col][row] = true;
+			}
+		}
 		return matrix;
 	}
 }

@@ -7,15 +7,19 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.tetris.Tetris;
 import view.panels.TetrisGraphics;
 import view.panels.TitlePanel;
 
 public class Frame extends JFrame implements Observer {
 	private static final long serialVersionUID = -4625604749828860822L;
 	private TetrisGraphics mainPanel;
+	private Tetris model;
 
-	public Frame() {
+	public Frame(Tetris model) {
 		super("Tetris");
+
+		this.model = model;
 		JPanel titlePanel = new TitlePanel(this);
 		mainPanel = new TetrisGraphics(this);
 		add(titlePanel, BorderLayout.NORTH);
@@ -24,7 +28,7 @@ public class Frame extends JFrame implements Observer {
 	}
 
 	private void setFrameProperties() {
-		// Actual width 795, Actual height 940
+
 		addWindowListener(new TetrisWindowListener());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
@@ -37,22 +41,13 @@ public class Frame extends JFrame implements Observer {
 	 * Deal with updates to the Tetris model
 	 */
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable o, Object arg) {
 
-		if (arg1 instanceof boolean[]) {
-			boolean[] grid = (boolean[]) arg1;
-			mainPanel.setGrid(grid);
-		}
 		mainPanel.repaint();
 	}
 
-	/**
-	 * Testing Main to test graphics without the game.
-	 *
-	 * @param args
-	 */
-	public static void main(String args[]) {
-		new Frame();
+	public Tetris getModel() {
+		return model;
 	}
 
 }

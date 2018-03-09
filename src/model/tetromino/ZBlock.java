@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class ZBlock extends Tetromino implements DrawInterface {
+public class ZBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
@@ -37,7 +37,7 @@ public class ZBlock extends Tetromino implements DrawInterface {
 			// . T
 			// T T
 			// T .
-		} 
+		}
 		return matrix;
 	}
 }

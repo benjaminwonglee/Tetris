@@ -6,19 +6,18 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import model.tetris.Tetris;
+
 public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1244543786097347429L;
 	private TetrisGraphics tetrisGraphics;
 
 	public GamePanel(TetrisGraphics tetrisGraphics) {
 		this.tetrisGraphics = tetrisGraphics;
-		JPanel grid = new GridPanel();
+		JPanel grid = new GridPanel(this);
 		add(grid);
 	}
 
-	// TODO: Draw the pieces in either the GridPanel or here. Decide.
-
-	// TODO: Figure out better names and what this code does
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -38,6 +37,10 @@ public class GamePanel extends JPanel {
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(450, 891);
+	}
+
+	public Tetris getModel() {
+		return tetrisGraphics.getModel();
 	}
 
 }

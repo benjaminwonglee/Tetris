@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-public class SBlock extends Tetromino implements DrawInterface {
+public class SBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
@@ -14,7 +14,7 @@ public class SBlock extends Tetromino implements DrawInterface {
 
 	@Override
 	public Color getColor() {
-		return Color.ORANGE;
+		return new Color(255, 140, 0);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class SBlock extends Tetromino implements DrawInterface {
 			// T .
 			// T T
 			// . T
-		} 
+		}
 		return matrix;
 	}
 }

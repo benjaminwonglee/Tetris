@@ -1,5 +1,6 @@
 package model.tetris;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.List;
 import java.util.Observable;
@@ -12,7 +13,7 @@ import model.tetromino.TetrominoGenerator;
 
 public class Tetris extends Observable {
 
-	private boolean[][] grid;
+	private Color[][] grid;
 	private int width = 10;
 	private int height = 22;
 	private int difficulty;
@@ -26,7 +27,7 @@ public class Tetris extends Observable {
 
 	public Tetris(int difficulty) {
 
-		grid = new boolean[width][height];
+		grid = new Color[width][height];
 		this.difficulty = difficulty;
 		current = getRandomTetromino();
 		nextTetromino = getRandomTetromino();
@@ -66,17 +67,17 @@ public class Tetris extends Observable {
 
 		boolean[][] tetromino = current.getTetrominoMatrix();
 		pivot = new Point();
-		pivot.x = (grid.length / 2) - (tetromino.length / 2) - 1;
+		pivot.x = (grid.length / 2) - (tetromino.length / 2) - (tetromino.length % 2);
 		pivot.y = 0;
 		for (int i = 0; i < tetromino.length; i++) {
 			for (int j = 0; j < tetromino[0].length; j++) {
 				if (tetromino[i][j]) {
-					grid[pivot.x + i][pivot.y + j] = true;
+					grid[pivot.x + i][pivot.y + j] = current.getColor();
 				}
 			}
 		}
+		notifyObservers();
 		setChanged();
-		notifyObservers(grid);
 		System.out.println(textGrid());
 	}
 
@@ -87,16 +88,18 @@ public class Tetris extends Observable {
 	}
 
 	public void holdTetromino() {
+
 		Tetromino tempTetromino = nextTetromino;
 		nextTetromino = getRandomTetromino();
 		heldTetromino = tempTetromino;
 	}
 
-	private boolean rowEmpty(boolean[][] grid, int row) {
+	private boolean rowEmpty(Color[][] grid, int row) {
 		return true;
 	}
 
 	public void setTetrominoAction(Action action) {
+
 		switch (action) {
 		case ROTATE_LEFT:
 			current.rotateLeft();
@@ -128,10 +131,11 @@ public class Tetris extends Observable {
 	 * @return
 	 */
 	public String textGrid() {
+
 		String text = "Current grid:\n";
 		for (int col = 0; col < grid[0].length; col++) {
 			for (int row = 0; row < grid.length; row++) {
-				if (grid[row][col]) {
+				if (grid[row][col] != null) {
 					text += " T ";
 				} else {
 					text += " F ";
@@ -146,11 +150,11 @@ public class Tetris extends Observable {
 		return generator;
 	}
 
-	public boolean[][] getGrid() {
+	public Color[][] getGrid() {
 		return grid;
 	}
 
-	public void setGrid(boolean[][] grid) {
+	public void setGrid(Color[][] grid) {
 		this.grid = grid;
 	}
 

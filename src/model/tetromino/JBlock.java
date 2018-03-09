@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.Arrays;
 
-public class JBlock extends Tetromino implements DrawInterface {
+public class JBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
