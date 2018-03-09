@@ -16,23 +16,19 @@ public class GamePanel extends JPanel {
 		add(grid);
 	}
 
-	//TODO: Draw the pieces in either the GridPanel or here. Decide.
+	// TODO: Draw the pieces in either the GridPanel or here. Decide.
 
+	// TODO: Figure out better names and what this code does
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(50, 10, 10));
-		g.fillRect(0, 0, getPreferredSize().width, getPreferredSize().height);
-		int offset1 = 1;
-		int offsetW1 = 6;
-		g.setColor(new Color(100, 10, 10));
-		g.fillRect(offset1 + offsetW1, offset1, getPreferredSize().width - (offset1 * 2) - (offsetW1 * 2),
-				getPreferredSize().height - (offset1 * 2));
-		int offset2 = 3;
-		int offsetW2 = 10;
-		g.setColor(new Color(130, 10, 10));
-		g.fillRect(offset2 + offsetW2, offset2, getPreferredSize().width - (offset2 * 2) - (offsetW2 * 2),
-				getPreferredSize().height - (offset2 * 2));
+		// Create a red border
+		for (int i = 1; i < 8; i++) {
+			g.setColor(new Color(50 + (20 * i), 10, 10));
+			int wd = (i - 1) * 4;
+			int ht = i - 1;
+			g.fillRect(wd, ht, getPreferredSize().width - (wd * 2), getPreferredSize().height - (ht * 2));
+		}
 	}
 
 	public TetrisGraphics getTetrisGraphics() {

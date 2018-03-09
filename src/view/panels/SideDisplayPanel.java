@@ -3,6 +3,7 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Polygon;
 
 import javax.swing.JPanel;
 
@@ -26,15 +27,28 @@ public class SideDisplayPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
-		for (int i = 20; i < 50; i++) {
+		int cols = 20;
+		int width = this.getPreferredSize().width / cols;
+		for (int column = 0; column < cols; column++) {
 
 			// Darker Grey
-			g.setColor(new Color(i*2, i*2, i*2));
-			g.fillRect((i - 20) * 15, 0, 15, 891);
+			int colorFactor = 40 + column;
+			g.setColor(new Color(colorFactor * 2, colorFactor * 2, colorFactor * 2));
+			g.fillRect(column * width, 0, width, this.getPreferredSize().height);
 
-			// Lighter Grey
-			g.setColor(new Color(i*3, i*3, i*3));
-			g.fillRect((i - 20) * 15, 0, 15, (i - 20) * 35);
+		}
+
+		width = 50;
+		int height = 50;
+		int widthMod = 60;
+		int heightMod = 30;
+		for (int y = -height; y < this.getPreferredSize().height; y += heightMod) {
+			int shade = 120;
+			for (int x = -width; x < this.getPreferredSize().width; x += widthMod) {
+				g.setColor(new Color(shade, shade, shade));
+				g.fillPolygon(ShapePolygon.fiveStar(x += width, y += height, width, height));
+				shade += 10;
+			}
 		}
 
 	}
