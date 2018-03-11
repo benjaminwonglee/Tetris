@@ -8,6 +8,7 @@ public class OBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
+
 		Polygon p = new Polygon();
 		g.drawPolygon(p);
 	}
@@ -19,6 +20,7 @@ public class OBlock extends Tetromino {
 
 	@Override
 	public boolean[][] getTetrominoMatrix() {
+
 		boolean[][] matrix = null;
 		matrix = new boolean[2][2];
 		matrix[0][0] = true;

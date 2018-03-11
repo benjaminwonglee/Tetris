@@ -8,6 +8,9 @@ public class TetrominoGenerator {
 	private List<Tetromino> tetrominoes;
 	int sizeOfList = 200;
 
+	/**
+	 * A constructor that generates and stores a randomly generated list of tetrominoes.
+	 */
 	public TetrominoGenerator() {
 		try {
 			tetrominoes = generateTetrominoes();
@@ -17,7 +20,9 @@ public class TetrominoGenerator {
 	}
 
 	public List<Tetromino> generateTetrominoes() throws Exception {
+
 		List<Tetromino> tetroList = new ArrayList<Tetromino>();
+
 		for (int i = 0; i < sizeOfList; i++) {
 			int choice = (int) (Math.random() * 7);
 			switch (choice) {
@@ -49,7 +54,7 @@ public class TetrominoGenerator {
 		return tetroList;
 	}
 
-		
+
 	public List<Tetromino> getTetrominoes() {
 		return tetrominoes;
 	}

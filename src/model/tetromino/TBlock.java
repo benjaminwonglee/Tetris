@@ -8,6 +8,7 @@ public class TBlock extends Tetromino {
 
 	@Override
 	public void draw(Graphics g) {
+
 		Polygon p = new Polygon();
 		g.drawPolygon(p);
 	}
@@ -19,6 +20,7 @@ public class TBlock extends Tetromino {
 
 	@Override
 	public boolean[][] getTetrominoMatrix() {
+
 		boolean[][] matrix = null;
 		if (getOrientation() == 0) {
 			matrix = new boolean[3][2];

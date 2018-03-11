@@ -7,6 +7,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.Controller;
 import model.tetris.Tetris;
 import view.panels.TetrisGraphics;
 import view.panels.TitlePanel;
@@ -17,9 +18,10 @@ public class Frame extends JFrame implements Observer {
 	private Tetris model;
 
 	public Frame(Tetris model) {
-		super("Tetris");
 
+		super("Tetris");
 		this.model = model;
+		this.addKeyListener(new Controller(model));
 		JPanel titlePanel = new TitlePanel(this);
 		mainPanel = new TetrisGraphics(this);
 		add(titlePanel, BorderLayout.NORTH);

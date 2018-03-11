@@ -3,6 +3,7 @@ package model.tetris;
 import java.util.TimerTask;
 
 public class TetrisTask extends TimerTask {
+
 	Tetris tetris;
 
 	public TetrisTask(Tetris tetris) {
