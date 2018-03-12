@@ -15,7 +15,7 @@ public class ZBlock extends Tetromino {
 
 	@Override
 	public Color getColor() {
-		return Color.GREEN;
+		return new Color(0, 160, 0);
 	}
 
 	@Override

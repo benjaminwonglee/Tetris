@@ -119,12 +119,20 @@ public class Tetris extends Observable {
 
 		switch (action) {
 		case ROTATE_LEFT:
-			// TODO: Check range out of bounds
-			current.rotateLeft();
+			// TODO: Correct the range checks here
+			if (rangeCheckX(1)) {
+				current.rotateLeft();
+			} else {
+				success = false;
+			}
 			break;
 		case ROTATE_RIGHT:
-			// TODO: Check range out of bounds
-			current.rotateRight();
+			// TODO: Correct the range checks here
+			if (rangeCheckX(1)) {
+				current.rotateRight();
+			} else {
+				success = false;
+			}
 			break;
 		case MOVE_LEFT:
 			if (rangeCheckX(-1)) {
@@ -161,7 +169,7 @@ public class Tetris extends Observable {
 		boolean[][] tetrominoMatrix = current.getTetrominoMatrix(current.getOrientation());
 		if (changeX > 0) {
 			result += tetrominoMatrix.length / 2 + tetrominoMatrix.length % 2;
-		} else {
+		} else if (changeX < 0) {
 			result -= tetrominoMatrix.length / 2;
 		}
 
