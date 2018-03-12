@@ -19,10 +19,10 @@ public class SBlock extends Tetromino {
 	}
 
 	@Override
-	public boolean[][] getTetrominoMatrix() {
+	public boolean[][] getTetrominoMatrix(int orientation) {
 
 		boolean[][] matrix = null;
-		if (getOrientation() == 0 || getOrientation() == 180) {
+		if (orientation == 0 || orientation == 180) {
 			matrix = new boolean[3][2];
 			matrix[1][0] = true;
 			matrix[2][0] = true;
@@ -30,7 +30,7 @@ public class SBlock extends Tetromino {
 			matrix[1][1] = true;
 			// . T T
 			// T T .
-		} else if (getOrientation() == 90 || getOrientation() == 270) {
+		} else if (orientation == 90 || orientation == 270) {
 			matrix = new boolean[2][3];
 			matrix[0][0] = true;
 			matrix[0][1] = true;

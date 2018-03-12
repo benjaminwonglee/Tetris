@@ -70,6 +70,6 @@ public abstract class Tetromino implements DrawInterface {
 		return orientation;
 	}
 
-	public abstract boolean[][] getTetrominoMatrix();
+	public abstract boolean[][] getTetrominoMatrix(int orientation);
 
 }

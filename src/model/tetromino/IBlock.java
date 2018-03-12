@@ -19,10 +19,10 @@ public class IBlock extends Tetromino {
 	}
 
 	@Override
-	public boolean[][] getTetrominoMatrix() {
+	public boolean[][] getTetrominoMatrix(int orientation) {
 
 		boolean[][] matrix = null;
-		if (getOrientation() == 0 || getOrientation() == 180) {
+		if (orientation == 0 || orientation == 180) {
 			matrix = new boolean[4][1];
 		} else {
 			matrix = new boolean[1][4];

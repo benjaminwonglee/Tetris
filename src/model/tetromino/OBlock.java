@@ -19,7 +19,7 @@ public class OBlock extends Tetromino {
 	}
 
 	@Override
-	public boolean[][] getTetrominoMatrix() {
+	public boolean[][] getTetrominoMatrix(int orientation) {
 
 		boolean[][] matrix = null;
 		matrix = new boolean[2][2];

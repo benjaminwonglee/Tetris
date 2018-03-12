@@ -2,6 +2,8 @@ package model.tetris;
 
 import java.util.TimerTask;
 
+import common.Action;
+
 public class TetrisTask extends TimerTask {
 
 	Tetris tetris;
@@ -12,11 +14,7 @@ public class TetrisTask extends TimerTask {
 
 	@Override
 	public void run() {
-		/*
-		 * TODO: Make behaviour on 1 tick. Drops by 1; change grid. Use
-		 * tetris.getPivot for position of tetromino.
-		 */
-
+		tetris.setTetrominoAction(Action.SOFT_DROP);
 	}
 
 }

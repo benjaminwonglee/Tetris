@@ -1,6 +1,7 @@
 package model.tetris;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.List;
 import java.util.Observable;
 import java.util.Timer;
@@ -22,6 +23,7 @@ public class Tetris extends Observable {
 	private Tetromino current;
 	private Tetromino nextTetromino;
 	private Tetromino heldTetromino;
+	private Point[] oldPosition;
 	private int tetrominoCount = 0;
 
 	public Tetris(int difficulty) {
@@ -38,7 +40,7 @@ public class Tetris extends Observable {
 
 		Timer t = new Timer();
 		TetrisTask tt = new TetrisTask(this);
-		t.scheduleAtFixedRate(tt, 0, 1000 / difficulty);
+		t.scheduleAtFixedRate(tt, 1000, 1000 / difficulty);
 	}
 
 	// private void runAlt() {
@@ -68,14 +70,30 @@ public class Tetris extends Observable {
 
 	private void createTetromino() {
 
-		boolean[][] tetromino = current.getTetrominoMatrix();
-
 		// Set original coordinates for tetromino
-		current.setX((grid.length / 2) - (tetromino.length / 2) - (tetromino.length % 2));
+		current.setX(grid.length / 2);
 		current.setY(0);
+
+		// Add all points for the old position
+		defineOldPosition();
 
 		updateGrid();
 		System.out.println(PrintUtils.getTextGrid(grid));
+	}
+
+	private void defineOldPosition() {
+
+		oldPosition = new Point[4];
+		boolean[][] tetromino = current.getTetrominoMatrix(current.getOrientation());
+		int count = 0;
+		for (int x = 0; x < tetromino.length; x++) {
+			for (int y = 0; y < tetromino[0].length; y++) {
+				if (tetromino[x][y]) {
+					oldPosition[count] = new Point((current.getX() - tetromino.length / 2) + x, current.getY() + y);
+					count++;
+				}
+			}
+		}
 	}
 
 	public Tetromino getRandomTetromino() {
@@ -97,18 +115,30 @@ public class Tetris extends Observable {
 
 	public void setTetrominoAction(Action action) {
 
+		boolean success = true;
+
 		switch (action) {
 		case ROTATE_LEFT:
+			// TODO: Check range out of bounds
 			current.rotateLeft();
 			break;
 		case ROTATE_RIGHT:
+			// TODO: Check range out of bounds
 			current.rotateRight();
 			break;
 		case MOVE_LEFT:
-			current.moveLeft();
+			if (rangeCheckX(-1)) {
+				current.moveLeft();
+			} else {
+				success = false;
+			}
 			break;
 		case MOVE_RIGHT:
-			current.moveRight();
+			if (rangeCheckX(1)) {
+				current.moveRight();
+			} else {
+				success = false;
+			}
 			break;
 		case SOFT_DROP:
 			current.softDrop();
@@ -119,18 +149,45 @@ public class Tetris extends Observable {
 		default:
 			break;
 		}
-		updateGrid();
+		if (success) {
+			updateGrid();
+		}
 		System.out.println(PrintUtils.getTextGrid(grid));
+	}
+
+	private boolean rangeCheckX(int changeX) {
+
+		int result = current.getX() + changeX;
+		boolean[][] tetrominoMatrix = current.getTetrominoMatrix(current.getOrientation());
+		if (changeX > 0) {
+			result += tetrominoMatrix.length / 2 + tetrominoMatrix.length % 2;
+		} else {
+			result -= tetrominoMatrix.length / 2;
+		}
+
+		if (result < 0 || result > grid.length) {
+			return false;
+		}
+		return true;
 	}
 
 	private void updateGrid() {
 
-		boolean[][] tetromino = current.getTetrominoMatrix();
+		// Clear the tiles in the old position
+		for (Point p : oldPosition) {
+			grid[p.x][p.y] = null;
+		}
+		// Update old position to be current
+		defineOldPosition();
 
+		// Update tetromino in new position
+		boolean[][] tetromino = current.getTetrominoMatrix(current.getOrientation());
 		for (int i = 0; i < tetromino.length; i++) {
 			for (int j = 0; j < tetromino[0].length; j++) {
 				if (tetromino[i][j]) {
-					grid[current.getX() + i][current.getY() + j] = current.getColor();
+					int actualX = current.getX() - (tetromino.length / 2) + i;
+					int actualY = current.getY() + j;
+					grid[actualX][actualY] = current.getColor();
 				}
 			}
 		}
