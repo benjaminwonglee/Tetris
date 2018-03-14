@@ -22,8 +22,8 @@ public class GridPanel extends JPanel {
 		super.paintComponent(g);
 		g.setColor(new Color(150, 150, 150));
 		this.setBackground(new Color(0, 0, 0));
-		drawGrid(g);
 		drawPieces(g);
+		drawGrid(g);
 	}
 
 	@Override
@@ -37,6 +37,7 @@ public class GridPanel extends JPanel {
 	 */
 	private void drawGrid(Graphics g) {
 
+		g.setColor(new Color(150, 150, 150));
 		for (int col = 0; col < 10; col++) {
 			for (int row = 0; row < 22; row++) {
 				g.drawRect(sqSize * col, sqSize * row, sqSize, sqSize);

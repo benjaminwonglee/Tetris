@@ -2,6 +2,7 @@ package model.tetris;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Observable;
 import java.util.Timer;
@@ -30,8 +31,7 @@ public class Tetris extends Observable {
 
 		grid = new Color[width][height];
 		this.difficulty = difficulty;
-		current = getRandomTetromino();
-		nextTetromino = getRandomTetromino();
+		nextTetromino = getTetromino();
 		createTetromino();
 		run();
 	}
@@ -43,32 +43,10 @@ public class Tetris extends Observable {
 		t.scheduleAtFixedRate(tt, 1000, 1000 / difficulty);
 	}
 
-	// private void runAlt() {
-	//
-	// // Will this work with KeyListener? If not, use java.util.timer.
-	// while (rowEmpty(grid, 0)) {
-	// tick();
-	// int waitTime = 1000 / difficulty;
-	// if (waitTime <= 0) {
-	// waitTime = 1;
-	// }
-	// try {
-	// TimeUnit.MILLISECONDS.sleep(waitTime);
-	// } catch (InterruptedException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	//
-	// private void tick() {
-	//
-	// }
-	//
-	// private boolean rowEmpty(Color[][] grid, int row) {
-	// return true;
-	// }
-
 	private void createTetromino() {
+
+		current = nextTetromino;
+		nextTetromino = getTetromino();
 
 		// Set original coordinates for tetromino
 		current.setX(grid.length / 2);
@@ -78,7 +56,6 @@ public class Tetris extends Observable {
 		defineOldPosition();
 
 		updateGrid();
-		System.out.println(PrintUtils.getTextGrid(grid));
 	}
 
 	private void defineOldPosition() {
@@ -96,7 +73,7 @@ public class Tetris extends Observable {
 		}
 	}
 
-	public Tetromino getRandomTetromino() {
+	public Tetromino getTetromino() {
 
 		List<Tetromino> tetrominoes = generator.getTetrominoes();
 		// Restart using the same tetromino set
@@ -109,7 +86,7 @@ public class Tetris extends Observable {
 	public void holdTetromino() {
 
 		Tetromino tempTetromino = nextTetromino;
-		nextTetromino = getRandomTetromino();
+		nextTetromino = getTetromino();
 		heldTetromino = tempTetromino;
 	}
 
@@ -149,7 +126,11 @@ public class Tetris extends Observable {
 			}
 			break;
 		case SOFT_DROP:
-			current.softDrop();
+			if (rangeCheckY(1)) {
+				current.softDrop();
+			} else {
+				createTetromino();
+			}
 			break;
 		case HARD_DROP:
 			current.hardDrop();
@@ -160,7 +141,6 @@ public class Tetris extends Observable {
 		if (success) {
 			updateGrid();
 		}
-		System.out.println(PrintUtils.getTextGrid(grid));
 	}
 
 	private boolean rangeCheckX(int changeX) {
@@ -177,6 +157,76 @@ public class Tetris extends Observable {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean rangeCheckY(int changeY) {
+
+		if (placeTetromino(changeY)) {
+			rowClear();
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean placeTetromino(int changeY) {
+
+		boolean[][] tetrominoMatrix = current.getTetrominoMatrix(current.getOrientation());
+		int result = current.getY() + tetrominoMatrix[0].length + changeY;
+		int endX = current.getX() + tetrominoMatrix.length / 2 + tetrominoMatrix.length % 2;
+
+		// Find any square at the bottom of the tetromino, return true if placed
+		for (int gridX = current.getX() - tetrominoMatrix.length / 2; gridX < endX; gridX++) {
+			int tetrominoX = gridX - (current.getX() - tetrominoMatrix.length / 2);
+
+			for (int gridY = current.getY(); gridY < result - 1; gridY++) {
+				int tetrominoY = gridY - current.getY();
+
+				// Continue if the square underneath is part of this tetromino
+				if (tetrominoY + 1 < tetrominoMatrix[0].length && tetrominoMatrix[tetrominoX][tetrominoY + 1]) {
+					continue;
+				}
+
+				// Continue if this square is not part of this tetromino
+				if (!tetrominoMatrix[tetrominoX][tetrominoY]) {
+					continue;
+				}
+
+				try {
+					if (grid[gridX][gridY + 1] != null) {
+						return true;
+					}
+				} catch (ArrayIndexOutOfBoundsException e) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private void rowClear() {
+
+		for (int y = 0; y < grid[0].length; y++) {
+			for (int x = 0; x < grid.length; x++) {
+				// Checking horizontally along each row
+				if (grid[x][y] == null) {
+					break;
+				}
+				if (x == grid.length - 1) {
+					clearRow(y);
+				}
+			}
+		}
+
+	}
+
+	private void clearRow(int toClear) {
+
+		for (int y = toClear; y > 1; y--) {
+			for (int x = 0; x < grid.length; x++) {
+				grid[x][y] = grid[x][y - 1];
+			}
+		}
 	}
 
 	private void updateGrid() {
