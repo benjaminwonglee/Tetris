@@ -36,4 +36,12 @@ public class IBlock extends Tetromino {
 		}
 		return matrix;
 	}
+
+//	@Override
+//	public boolean contains(int x, int y) {
+//		if (x >= (getX() / 2) && x <= ((getX() / 2) + 4)) {
+//
+//		}
+//		return false;
+//	}
 }

@@ -2,13 +2,11 @@ package model.tetris;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Observable;
 import java.util.Timer;
 
 import common.Action;
-import common.PrintUtils;
 import model.tetromino.Tetromino;
 import model.tetromino.TetrominoGenerator;
 
@@ -48,6 +46,12 @@ public class Tetris extends Observable {
 		current = nextTetromino;
 		nextTetromino = getTetromino();
 
+		restartPosition();
+
+	}
+
+	private void restartPosition() {
+
 		// Set original coordinates for tetromino
 		current.setX(grid.length / 2);
 		current.setY(0);
@@ -85,9 +89,25 @@ public class Tetris extends Observable {
 
 	public void holdTetromino() {
 
-		Tetromino tempTetromino = nextTetromino;
-		nextTetromino = getTetromino();
-		heldTetromino = tempTetromino;
+		if (heldTetromino == null) {
+			heldTetromino = current;
+			heldTetromino.setX(grid.length / 2);
+			heldTetromino.setY(0);
+
+			current = nextTetromino;
+			nextTetromino = getTetromino();
+		} else {
+			Tetromino temp = current;
+			current = heldTetromino;
+			heldTetromino = temp;
+
+			heldTetromino.setX(grid.length / 2);
+			heldTetromino.setY(0);
+			current.setX(grid.length / 2);
+			current.setY(0);
+
+		}
+		clearAndUpdateOldPosition();
 	}
 
 	public void setTetrominoAction(Action action) {
@@ -153,9 +173,22 @@ public class Tetris extends Observable {
 			result -= tetrominoMatrix.length / 2;
 		}
 
+		// Check out of bounds
 		if (result < 0 || result > grid.length) {
 			return false;
 		}
+
+		// Check collision
+//		for (Point p : oldPosition) {
+//			// Check if the new point is filled
+//			if (grid[p.x + changeX][p.y] != null) {
+//				// Check if the filled point is part of this new point
+//				if(current.contains(p.x, p.y)) {
+//					continue;
+//				}
+//
+//			}
+//		}
 		return true;
 	}
 
@@ -231,12 +264,7 @@ public class Tetris extends Observable {
 
 	private void updateGrid() {
 
-		// Clear the tiles in the old position
-		for (Point p : oldPosition) {
-			grid[p.x][p.y] = null;
-		}
-		// Update old position to be current
-		defineOldPosition();
+		clearAndUpdateOldPosition();
 
 		// Update tetromino in new position
 		boolean[][] tetromino = current.getTetrominoMatrix(current.getOrientation());
@@ -251,6 +279,16 @@ public class Tetris extends Observable {
 		}
 		setChanged();
 		notifyObservers();
+	}
+
+	private void clearAndUpdateOldPosition() {
+
+		// Clear the tiles in the old position
+		for (Point p : oldPosition) {
+			grid[p.x][p.y] = null;
+		}
+		// Update old position to be current
+		defineOldPosition();
 	}
 
 	public TetrominoGenerator getGenerator() {

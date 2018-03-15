@@ -71,5 +71,6 @@ public abstract class Tetromino implements DrawInterface {
 	}
 
 	public abstract boolean[][] getTetrominoMatrix(int orientation);
-
+//
+//	public abstract boolean contains(int x, int y);
 }
