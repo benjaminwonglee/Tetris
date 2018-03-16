@@ -22,23 +22,43 @@ public class ZBlock extends Tetromino {
 	public boolean[][] getTetrominoMatrix(int orientation) {
 
 		boolean[][] matrix = null;
-		if (orientation == 0 || orientation == 180) {
-			matrix = new boolean[3][2];
+		if (orientation == 0) {
+			matrix = new boolean[3][3];
 			matrix[0][0] = true;
 			matrix[1][0] = true;
 			matrix[1][1] = true;
 			matrix[2][1] = true;
 			// T T .
 			// . T T
-		} else if (orientation == 90 || orientation == 270) {
-			matrix = new boolean[2][3];
-			matrix[1][0] = true;
+			// . . .
+		} else if (orientation == 90) {
+			matrix = new boolean[3][3];
+			matrix[2][0] = true;
+			matrix[1][1] = true;
+			matrix[2][1] = true;
+			matrix[1][2] = true;
+			// . . T
+			// . T T
+			// . T .
+		} else if (orientation == 180) {
+			matrix = new boolean[3][3];
 			matrix[0][1] = true;
 			matrix[1][1] = true;
+			matrix[1][2] = true;
+			matrix[2][2] = true;
+			// . . .
+			// T T .
+			// . T T
+
+		} else if (orientation == 270) {
+			matrix = new boolean[3][3];
+			matrix[1][0] = true;
+			matrix[1][1] = true;
+			matrix[0][1] = true;
 			matrix[0][2] = true;
-			// . T
-			// T T
-			// T .
+			// . T .
+			// T T .
+			// T . .
 		}
 		return matrix;
 	}

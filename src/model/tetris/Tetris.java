@@ -117,19 +117,14 @@ public class Tetris extends Observable {
 		switch (action) {
 		case ROTATE_LEFT:
 			// TODO: Correct the range checks here
-			if (rangeCheckX(1)) {
-				current.rotateLeft();
-			} else {
-				success = false;
-			}
+
+			current.rotateLeft();
+
+
 			break;
 		case ROTATE_RIGHT:
 			// TODO: Correct the range checks here
-			if (rangeCheckX(1)) {
 				current.rotateRight();
-			} else {
-				success = false;
-			}
 			break;
 		case MOVE_LEFT:
 			if (rangeCheckX(-1)) {
