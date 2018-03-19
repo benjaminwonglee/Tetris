@@ -7,9 +7,20 @@ import java.awt.Polygon;
 public class JBlock extends Tetromino {
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, int pixPerBlock, int startX, int startY) {
 
 		Polygon p = new Polygon();
+		boolean[][] tetrominoMatrix = getTetrominoMatrix(getOrientation());
+
+		p.addPoint(startX, startY);
+		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY);
+		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY + (pixPerBlock * tetrominoMatrix[0].length));
+		p.addPoint(startX, startY + (pixPerBlock * tetrominoMatrix[0].length));
+
+		Color current = getColor();
+		g.setColor(current);
+		g.fillPolygon(p);
+		g.setColor(getOutlineColor());
 		g.drawPolygon(p);
 	}
 

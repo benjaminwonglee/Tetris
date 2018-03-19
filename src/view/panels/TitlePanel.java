@@ -10,10 +10,12 @@ import javax.swing.JPanel;
 import view.Frame;
 
 public class TitlePanel extends JPanel {
+	
 	private static final long serialVersionUID = 2349693647370386088L;
 	private Frame frame;
 
 	public TitlePanel(Frame frame) {
+		
 		this.frame = frame;
 		defineTitlePanel();
 	}

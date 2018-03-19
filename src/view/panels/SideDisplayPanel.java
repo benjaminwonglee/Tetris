@@ -6,11 +6,15 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import model.tetromino.Tetromino;
+
 public class SideDisplayPanel extends JPanel {
+
 	private static final long serialVersionUID = 4667216275241133396L;
 	private TetrisGraphics tetrisGraphics;
 
 	public SideDisplayPanel(TetrisGraphics tetrisGraphics) {
+
 		this.tetrisGraphics = tetrisGraphics;
 		defineDisplayPanel();
 	}
@@ -26,6 +30,13 @@ public class SideDisplayPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
+		paintBackground(g);
+		paintNextQueue(g);
+
+	}
+
+	private void paintBackground(Graphics g) {
+
 		int cols = 20;
 		int width = this.getPreferredSize().width / cols;
 		for (int column = 0; column < cols; column++) {
@@ -49,7 +60,24 @@ public class SideDisplayPanel extends JPanel {
 				shade += 10;
 			}
 		}
+	}
 
+	private void paintNextQueue(Graphics g) {
+
+		Tetromino[] nextQueue = tetrisGraphics.getFrame().getModel().getNextQueue();
+		int xPos = this.getPreferredSize().width / 2;
+		int yPos = 50;
+		int pixelsPerBlock = 50;
+		for (Tetromino t : nextQueue) {
+			int xLength = t.getTetrominoMatrix(t.getOrientation()).length;
+			xPos -= (pixelsPerBlock * (xLength / 2));
+			if (xLength % 2 == 1) {
+				xPos -= pixelsPerBlock / 2;
+			}
+			t.draw(g, pixelsPerBlock, xPos, yPos);
+			yPos += pixelsPerBlock * 3;
+			xPos = this.getPreferredSize().width / 2;
+		}
 	}
 
 	public TetrisGraphics getTetrisGraphics() {
