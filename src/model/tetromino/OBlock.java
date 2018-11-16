@@ -26,7 +26,7 @@ public class OBlock extends Tetromino {
 
 	@Override
 	public Color getColor() {
-		return Color.YELLOW;
+		return Color.GREEN;
 	}
 
 	@Override

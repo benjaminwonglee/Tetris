@@ -10,12 +10,13 @@ public class LBlock extends Tetromino {
 	public void draw(Graphics g, int pixPerBlock, int startX, int startY) {
 
 		Polygon p = new Polygon();
-		boolean[][] tetrominoMatrix = getTetrominoMatrix(getOrientation());
 
 		p.addPoint(startX, startY);
-		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY);
-		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY + (pixPerBlock * tetrominoMatrix[0].length));
-		p.addPoint(startX, startY + (pixPerBlock * tetrominoMatrix[0].length));
+		p.addPoint(startX + (pixPerBlock * 3), startY);
+		p.addPoint(startX + (pixPerBlock * 3), startY + pixPerBlock);
+		p.addPoint(startX + pixPerBlock, startY + pixPerBlock);
+		p.addPoint(startX + pixPerBlock, startY + (pixPerBlock * 2));
+		p.addPoint(startX, startY + (pixPerBlock * 2));
 
 		Color current = getColor();
 		g.setColor(current);
@@ -26,7 +27,7 @@ public class LBlock extends Tetromino {
 
 	@Override
 	public Color getColor() {
-		return Color.PINK;
+		return Color.YELLOW;
 	}
 
 	@Override

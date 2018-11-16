@@ -90,7 +90,7 @@ public class Tetris extends Observable {
 
 		List<Tetromino> tetrominoes = generator.getTetrominoes();
 		// Restart using the same tetromino set
-		if (tetrominoCount > tetrominoes.size()) {
+		if (tetrominoCount >= tetrominoes.size() - 1) {
 			tetrominoCount = 0;
 		}
 		return tetrominoes.get(tetrominoCount++);

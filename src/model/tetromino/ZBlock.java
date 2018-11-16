@@ -10,12 +10,15 @@ public class ZBlock extends Tetromino {
 	public void draw(Graphics g, int pixPerBlock, int startX, int startY) {
 
 		Polygon p = new Polygon();
-		boolean[][] tetrominoMatrix = getTetrominoMatrix(getOrientation());
 
 		p.addPoint(startX, startY);
-		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY);
-		p.addPoint(startX + (pixPerBlock * tetrominoMatrix.length), startY + (pixPerBlock * tetrominoMatrix[0].length));
-		p.addPoint(startX, startY + (pixPerBlock * tetrominoMatrix[0].length));
+		p.addPoint(startX + (pixPerBlock * 2), startY);
+		p.addPoint(startX + (pixPerBlock * 2), startY + pixPerBlock);
+		p.addPoint(startX + (pixPerBlock * 3), startY + pixPerBlock);
+		p.addPoint(startX + (pixPerBlock * 3), startY + (pixPerBlock * 2));
+		p.addPoint(startX + pixPerBlock, startY + (pixPerBlock * 2));
+		p.addPoint(startX + pixPerBlock, startY + pixPerBlock);
+		p.addPoint(startX, startY + pixPerBlock);
 
 		Color current = getColor();
 		g.setColor(current);
@@ -26,7 +29,7 @@ public class ZBlock extends Tetromino {
 
 	@Override
 	public Color getColor() {
-		return new Color(0, 160, 0);
+		return new Color(200, 110, 200);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ public class SideDisplayPanel extends JPanel {
 
 	private static final long serialVersionUID = 4667216275241133396L;
 	private TetrisGraphics tetrisGraphics;
+	private static final int PIXELS_PER_BLOCK = 35;
 
 	public SideDisplayPanel(TetrisGraphics tetrisGraphics) {
 
@@ -67,17 +69,53 @@ public class SideDisplayPanel extends JPanel {
 		Tetromino[] nextQueue = tetrisGraphics.getFrame().getModel().getNextQueue();
 		int xPos = this.getPreferredSize().width / 2;
 		int yPos = 50;
-		int pixelsPerBlock = 50;
+
+		drawCenteredTitle("Next Queue", xPos, yPos, g);
+		yPos += 40;
+
 		for (Tetromino t : nextQueue) {
-			int xLength = t.getTetrominoMatrix(t.getOrientation()).length;
-			xPos -= (pixelsPerBlock * (xLength / 2));
-			if (xLength % 2 == 1) {
-				xPos -= pixelsPerBlock / 2;
-			}
-			t.draw(g, pixelsPerBlock, xPos, yPos);
-			yPos += pixelsPerBlock * 3;
-			xPos = this.getPreferredSize().width / 2;
+			drawTetromino(t, xPos, yPos, PIXELS_PER_BLOCK, g);
+			yPos += PIXELS_PER_BLOCK * 3;
 		}
+
+		paintHoldQueue(g, yPos);
+	}
+
+	private void paintHoldQueue(Graphics g, int yPos) {
+
+		int xPos = this.getPreferredSize().width / 2;
+		yPos += 60;
+
+		drawCenteredTitle("Holding", xPos, yPos, g);
+		yPos += 40;
+
+		Tetromino heldPiece = tetrisGraphics.getFrame().getModel().getHeldTetromino();
+		if (heldPiece != null) {
+			drawTetromino(heldPiece, xPos, yPos, PIXELS_PER_BLOCK, g);
+		}
+	}
+
+	private void drawTetromino(Tetromino t, int xPos, int yPos, int pixelsPerBlock, Graphics g) {
+
+		int xLength = t.getTetrominoMatrix(t.getOrientation()).length;
+		xPos -= (pixelsPerBlock * (xLength / 2));
+		if (xLength % 2 == 1) {
+			xPos -= pixelsPerBlock / 2;
+		}
+		t.draw(g, pixelsPerBlock, xPos, yPos);
+	}
+
+	/**
+	 * Draw a title at the center of a panel
+	 * 
+	 * @param title
+	 * @param g
+	 */
+	public static void drawCenteredTitle(String title, int xPos, int yPos, Graphics g) {
+
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Times", Font.BOLD, 26));
+		g.drawString(title, xPos - (g.getFontMetrics().stringWidth(title) / 2), yPos);
 	}
 
 	public TetrisGraphics getTetrisGraphics() {
