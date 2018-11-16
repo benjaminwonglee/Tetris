@@ -20,7 +20,7 @@ public class Tetris extends Observable {
 	// Tetromino fields
 	private TetrominoGenerator generator = new TetrominoGenerator();
 	private Tetromino current;
-	private Tetromino nextTetromino;
+	private Tetromino[] nextQueue;
 	private Tetromino heldTetromino;
 	private Point[] oldPosition;
 	private int tetrominoCount = 0;
@@ -29,7 +29,13 @@ public class Tetris extends Observable {
 
 		grid = new Color[width][height];
 		this.difficulty = difficulty;
-		nextTetromino = getTetromino();
+
+		// Define and fill the queue of next tetrominoes
+		nextQueue = new Tetromino[4];
+		for (int i = 0; i < nextQueue.length; i++) {
+			nextQueue[i] = getTetromino();
+		}
+
 		createTetromino();
 		run();
 	}
@@ -43,8 +49,11 @@ public class Tetris extends Observable {
 
 	private void createTetromino() {
 
-		current = nextTetromino;
-		nextTetromino = getTetromino();
+		current = nextQueue[0];
+		for (int i = 0; i < nextQueue.length - 1; i++) {
+			nextQueue[i] = nextQueue[i + 1];
+		}
+		nextQueue[nextQueue.length - 1] = getTetromino();
 
 		restartPosition();
 
@@ -81,7 +90,7 @@ public class Tetris extends Observable {
 
 		List<Tetromino> tetrominoes = generator.getTetrominoes();
 		// Restart using the same tetromino set
-		if (tetrominoCount > tetrominoes.size()) {
+		if (tetrominoCount >= tetrominoes.size() - 1) {
 			tetrominoCount = 0;
 		}
 		return tetrominoes.get(tetrominoCount++);
@@ -94,8 +103,8 @@ public class Tetris extends Observable {
 			heldTetromino.setX(grid.length / 2);
 			heldTetromino.setY(0);
 
-			current = nextTetromino;
-			nextTetromino = getTetromino();
+			current = nextQueue[0];
+			nextQueue[nextQueue.length - 1] = getTetromino();
 		} else {
 			Tetromino temp = current;
 			current = heldTetromino;
@@ -179,16 +188,25 @@ public class Tetris extends Observable {
 		}
 
 		// Check collision
-//		for (Point p : oldPosition) {
-//			// Check if the new point is filled
-//			if (grid[p.x + changeX][p.y] != null) {
-//				// Check if the filled point is part of this new point
-//				if(current.contains(p.x, p.y)) {
-//					continue;
-//				}
-//
-//			}
-//		}
+		for (Point p : oldPosition) {
+
+			Color gridPosition = grid[p.x + changeX][p.y];
+			// Check if the new point is filled
+			if (gridPosition != null) {
+
+				// Check if the new point is part of an old position for this tetromino
+				boolean found = false;
+				for (Point old : oldPosition) {
+					if (old.equals(new Point(p.x + changeX, p.y))) {
+						found = true;
+					}
+				}
+
+				if (!found) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
@@ -307,8 +325,8 @@ public class Tetris extends Observable {
 		return current;
 	}
 
-	public Tetromino getNextTetromino() {
-		return nextTetromino;
+	public Tetromino[] getNextQueue() {
+		return nextQueue;
 	}
 
 	public Tetromino getHeldTetromino() {

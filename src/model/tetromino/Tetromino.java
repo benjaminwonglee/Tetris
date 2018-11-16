@@ -1,5 +1,7 @@
 package model.tetromino;
 
+import java.awt.Color;
+
 public abstract class Tetromino implements DrawInterface {
 
 	private int x;
@@ -70,7 +72,13 @@ public abstract class Tetromino implements DrawInterface {
 		return orientation;
 	}
 
+	public Color getOutlineColor() {
+		return new Color(0, 10, 10);
+	}
+
 	public abstract boolean[][] getTetrominoMatrix(int orientation);
-//
-//	public abstract boolean contains(int x, int y);
+
+
+	//
+	// public abstract boolean contains(int x, int y);
 }

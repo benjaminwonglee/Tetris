@@ -7,15 +7,29 @@ import java.awt.Polygon;
 public class SBlock extends Tetromino {
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, int pixPerBlock, int startX, int startY) {
 
 		Polygon p = new Polygon();
+
+		p.addPoint(startX + pixPerBlock, startY);
+		p.addPoint(startX + (pixPerBlock * 3), startY);
+		p.addPoint(startX + (pixPerBlock * 3), startY + pixPerBlock);
+		p.addPoint(startX + (pixPerBlock * 2), startY + pixPerBlock);
+		p.addPoint(startX + (pixPerBlock * 2), startY + (pixPerBlock * 2));
+		p.addPoint(startX, startY + (pixPerBlock * 2));
+		p.addPoint(startX, startY + pixPerBlock);
+		p.addPoint(startX + pixPerBlock, startY + pixPerBlock);
+
+		Color current = getColor();
+		g.setColor(current);
+		g.fillPolygon(p);
+		g.setColor(getOutlineColor());
 		g.drawPolygon(p);
 	}
 
 	@Override
 	public Color getColor() {
-		return new Color(255, 140, 0);
+		return Color.BLUE;
 	}
 
 	@Override

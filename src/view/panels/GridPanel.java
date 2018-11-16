@@ -37,7 +37,7 @@ public class GridPanel extends JPanel {
 	 */
 	private void drawGrid(Graphics g) {
 
-		g.setColor(new Color(150, 150, 150));
+		g.setColor(new Color(90, 90, 90));
 		for (int col = 0; col < 10; col++) {
 			for (int row = 0; row < 22; row++) {
 				g.drawRect(sqSize * col, sqSize * row, sqSize, sqSize);
