@@ -188,16 +188,25 @@ public class Tetris extends Observable {
 		}
 
 		// Check collision
-		// for (Point p : oldPosition) {
-		// // Check if the new point is filled
-		// if (grid[p.x + changeX][p.y] != null) {
-		// // Check if the filled point is part of this new point
-		// if(current.contains(p.x, p.y)) {
-		// continue;
-		// }
-		//
-		// }
-		// }
+		for (Point p : oldPosition) {
+
+			Color gridPosition = grid[p.x + changeX][p.y];
+			// Check if the new point is filled
+			if (gridPosition != null) {
+
+				// Check if the new point is part of an old position for this tetromino
+				boolean found = false;
+				for (Point old : oldPosition) {
+					if (old.equals(new Point(p.x + changeX, p.y))) {
+						found = true;
+					}
+				}
+
+				if (!found) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
